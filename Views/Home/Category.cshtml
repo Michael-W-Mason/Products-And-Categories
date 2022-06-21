@@ -1,0 +1,38 @@
+@model Association
+<div class="d-flex flex-column align-items-center mt-4 gap-5">
+    <div class="d-flex flex-row justify-content-center align-items-center">
+        <h1>@ViewBag.OneCategory.Name</h1>
+    </div>
+
+    <div class="container-fluid row">
+        <div class="col-6">
+            <h2>Categories</h2>
+            <ul>
+                @{
+                    foreach(Association product in ViewBag.OneCategory.Products)
+                    {
+                        <li>@product.Product.Name</li>
+                    }
+                }
+            </ul>
+        </div>
+        <form class="col-6" method="post" action="/categories/update/@ViewBag.OneCategory.CategoryId">
+            <h2 class="row">Add Category</h2>
+            <div class="row w-50 g-2">
+                <label>Name</label>
+                <select asp-for="ProductId">
+                    @{
+                        foreach(var product in ViewBag.otherProducts)
+                        {
+                            <option value="@product.ProductId">@product.Name</option>
+                        }
+                    }
+                </select>
+                <span class="text-danger">
+                </span>
+            </div>
+            <input type="submit" class="btn btn-primary row mt-2" value="Add">
+        </form>
+
+    </div>
+</div>

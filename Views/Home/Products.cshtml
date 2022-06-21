@@ -1,0 +1,38 @@
+@model Product
+<div class="d-flex flex-column align-items-center mt-4 gap-5">
+
+    <div class="d-flex flex-row justify-content-center align-items-center">
+        <h1>Products | <a href="/categories">Categories</a></h1>
+    </div>
+
+    <div class="container-fluid row">
+        <form class="col-6" action="/products/create" method="post">
+            <h2 class="row">New Product</h2>
+            <div class="row w-50 g-2">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="row w-50 g-2">
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" type="text">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="row w-50 g-2">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" type="number">
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+            <input type="submit" class="btn btn-primary row mt-2" placeholder="Create">
+        </form>
+        <div class="col-6">
+            <h2>Existing Products</h2>
+            @{
+                foreach(Product product in ViewBag.Products)
+                {
+                    <a class="d-block" href="/products/@product.ProductId">@product.Name</a>
+                }
+            }
+        </div>
+    </div>
+</div>
